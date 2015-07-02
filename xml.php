@@ -3,7 +3,7 @@ header('Content-Type: text/html; charset=UTF-8');
 #-- Hay que habilitar en php.ini la linea ;extension=php_openssl.dll (simplemente quitar el ;)
 #-- Config
 $server = "gnusocial.net";
-$user = "4028";
+$user = "colegota";
 $protocol = "http://";
 #-- En la siguiente linea simplemente metemos el timeline del usuario
 $xml = simplexml_load_file($protocol.$server."/api/statuses/user_timeline/".$user.".xml");
