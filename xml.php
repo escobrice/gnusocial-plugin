@@ -5,6 +5,8 @@ header('Content-Type: text/html; charset=UTF-8');
 $server = "gnusocial.net";
 $user = "colegota";
 $protocol = "http://";
+$cuantos = 5;
+$cont=0;
 #-- En la siguiente linea simplemente metemos el timeline del usuario
 $xml = simplexml_load_file($protocol.$server."/api/statuses/user_timeline/".$user.".xml");
 echo '<div style="font-size:small; width: 300; height: 300; overflow:scroll">';
@@ -31,9 +33,11 @@ foreach($xml->status as $status)
   $texto=str_replace($server.'/@',$server,$texto);
   $texto=str_replace($server.'/tag/#',$server.'/tag/',$texto);
   echo '<img src="'.$imagen.'" Align=ABSMIDDLE>'.'   '.
-  '<strong><a target="_blank" href="'.$protocol.$server.'/'.$status->user->screen_name.'">'.
-  $status->user->screen_name.'</a></strong><br \> '.
+  '<strong><a target="_blank" href="'.$protocol.$server.'/'.$user->screen_name.'">'.$user->screen_name.'</a></strong><br \> '.
   $texto.'<br /><a style="text-decoration:none;color:black" target="_blank" href="'.$protocol.$server.'/notice/'.$status->id.'">'.$fecha.'</a><br /><hr>';
+  if (++$cont>=$cuantos) {
+   break;
+   }
   }
   echo '</div>';
   function convertirURL($url)
@@ -67,4 +71,3 @@ foreach($xml->status as $status)
 	return $f;
 }
 ?> 
-
