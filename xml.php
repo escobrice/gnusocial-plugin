@@ -10,7 +10,12 @@ $xml = simplexml_load_file($protocol.$server."/api/statuses/user_timeline/".$use
 echo '<div style="font-size:small; width: 300; height: 300; overflow:scroll">';
 foreach($xml->status as $status)
   {
+  $retweet=$status->retweeted_status;
+  if ($retweet != "") {
+  $user=$retweet->user;}
+  else {
   $user=$status->user;
+  }
   $imagen=$user->profile_image_url;
   $perfil=$user->{'statusnet:profile_url'};
   $fecha=$status->created_at;
