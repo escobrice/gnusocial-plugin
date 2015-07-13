@@ -2,39 +2,50 @@
 header('Content-Type: text/html; charset=UTF-8');
 #-- Hay que habilitar en php.ini la linea ;extension=php_openssl.dll (simplemente quitar el ;)
 #-- Config
+$timeline="user"; //user: usuario ; friends: /all
 $server = "gnusocial.net";
-$user = "colegota";
+$user= "colegota";
 $protocol = "http://";
-$cuantos = 5;
+$cuantos = 10;
 $cont=0;
 #-- En la siguiente linea simplemente metemos el timeline del usuario
-$xml = simplexml_load_file($protocol.$server."/api/statuses/user_timeline/".$user.".xml");
-echo '<div style="font-size:small; width: 300; height: 300; overflow:scroll">';
+$xml = simplexml_load_file($protocol.$server."/api/statuses/".$timeline."_timeline/".$user.".xml");
+echo '<div style="font-size:small; width: 600; height: 600; overflow:scroll">';
 foreach($xml->status as $status)
   {
   $retweet=$status->retweeted_status;
   if ($retweet != "") {
-  $user=$retweet->user;}
-  else {
-  $user=$status->user;
+    $userini=$status->user;
+    $status=$status->retweeted_status;
+        $RTtext="Repetido por ";
   }
+  else {
+    //$user=$status->user;
+    $userini=$status->user;
+    $RTtext="";
+  }
+  $user=$status->user;
   $imagen=$user->profile_image_url;
   $perfil=$user->{'statusnet:profile_url'};
   $fecha=$status->created_at;
   $fecha=convertirfecha($fecha);
-  $texto=$status->text;
-  $texto=convertirURL($texto);
-  $texto=convertirgrupo($texto);
-  $texto=convertirusuario($texto);
-  $texto=convertiretiqueta($texto);
-  $html=$status->{'statusnet:html'};
+  //$texto=$status->text;
+  $namespaces = $status->getNamespaces(true);
+  $texto = $status->children($namespaces["html"]);
+  //$texto=$status->statusnet->html;
+  //$texto=convertirURL($texto);
+  //$texto=convertirgrupo($texto);
+  //$texto=convertirusuario($texto);
+  //$texto=convertiretiqueta($texto);
+  //$html=$status->{'statusnet:html'};
   #--Las siguientes dos lineas se hacen aquí, porque no fui capaz de que funcionara en las funciones
-  $texto=str_replace('group/!','group/',$texto);
-  $texto=str_replace($server.'/@',$server,$texto);
-  $texto=str_replace($server.'/tag/#',$server.'/tag/',$texto);
+  //$texto=str_replace('group/!','group/',$texto);
+  //$texto=str_replace($server.'/@',$server,$texto);
+  //$texto=str_replace($server.'/tag/#',$server.'/tag/',$texto);
   echo '<img src="'.$imagen.'" Align=ABSMIDDLE>'.'   '.
-  '<strong><a target="_blank" href="'.$protocol.$server.'/'.$user->screen_name.'">'.$user->screen_name.'</a></strong><br \> '.
-  $texto.'<br /><a style="text-decoration:none;color:black" target="_blank" href="'.$protocol.$server.'/notice/'.$status->id.'">'.$fecha.'</a><br /><hr>';
+  '<strong>'.$RTtext.'<a target="_blank" href="'.$protocol.$server.'/'.$userini->screen_name.'">'.$userini->screen_name.'</a></strong><br \> ';
+  echo $texto;
+  echo '<br /><a style="text-decoration:none;color:black" target="_blank" href="'.$protocol.$server.'/notice/'.$status->id.'">'.$fecha.'</a><br /><hr>';
   if (++$cont>=$cuantos) {
    break;
    }
@@ -71,3 +82,4 @@ foreach($xml->status as $status)
 	return $f;
 }
 ?> 
+
