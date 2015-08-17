@@ -10,7 +10,28 @@ $cuantos = 10;
 $cont=0;
 #-- En la siguiente linea simplemente metemos el timeline del usuario
 $xml = simplexml_load_file($protocol.$server."/api/statuses/".$timeline."_timeline/".$user.".xml");
-echo '<div style="font-size:small; width: 600; height: 600; overflow:scroll">';
+echo '<style type="text/css" media="screen">
+#unmensaje
+{
+width: 90%;
+margin: 10px auto;
+background-color: #fff;
+color: #333;
+border: 1px solid gray;
+}
+#cabecera{
+padding: .5em;
+background-color: #ddd;
+border-bottom: 1px solid gray;
+}
+#pie
+{
+clear: both;
+margin: 0;
+padding: .5em;
+}
+</style>';
+echo '<div id="mensajes" style="font-size:small; overflow:scroll">';
 foreach($xml->status as $status)
   {
   $retweet=$status->retweeted_status;
@@ -42,10 +63,12 @@ foreach($xml->status as $status)
   //$texto=str_replace('group/!','group/',$texto);
   //$texto=str_replace($server.'/@',$server,$texto);
   //$texto=str_replace($server.'/tag/#',$server.'/tag/',$texto);
-  echo '<img src="'.$imagen.'" Align=ABSMIDDLE>'.'   '.
-  '<strong>'.$RTtext.'<a target="_blank" href="'.$protocol.$server.'/'.$userini->screen_name.'">'.$userini->screen_name.'</a></strong><br \> ';
+  echo '<div id="unmensaje">';
+  echo '<div id="cabecera"><img src="'.$imagen.'" Align=ABSMIDDLE>'.'   '.
+  '<strong>'.$RTtext.'<a target="_blank" href="'.$protocol.$server.'/'.$userini->screen_name.'">'.$userini->screen_name.'</a></strong><br \></div>';
   echo $texto;
-  echo '<br /><a style="text-decoration:none;color:black" target="_blank" href="'.$protocol.$server.'/notice/'.$status->id.'">'.$fecha.'</a><br /><hr>';
+  echo '<div id="pie"> <br /><hr width="50%"><a style="text-decoration:none;color:black" target="_blank" href="'.$protocol.$server.'/notice/'.$status->id.'">'.$fecha.'</a><br /></div>';
+  echo '</div>';
   if (++$cont>=$cuantos) {
    break;
    }
@@ -82,4 +105,5 @@ foreach($xml->status as $status)
 	return $f;
 }
 ?> 
+
 
