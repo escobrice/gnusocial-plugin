@@ -14,7 +14,7 @@ echo '<style type="text/css" media="screen">
 #unmensaje
 {
 width: 90%;
-margin: 10px auto;
+margin: 5px auto;
 background-color: #fff;
 color: #333;
 border: 1px solid gray;
@@ -24,14 +24,36 @@ padding: .5em;
 background-color: #ddd;
 border-bottom: 1px solid gray;
 }
+#cuerpo{
+padding: .5em;
+background-color: #0;
+}
 #pie
 {
 clear: both;
 margin: 0;
 padding: .5em;
 }
+a {
+color: #666	
+}
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
 </style>';
-echo '<div id="mensajes" style="font-size:small; overflow:scroll">';
+echo '<div id="mensajes" style="font-size:small;">';
 foreach($xml->status as $status)
   {
   $retweet=$status->retweeted_status;
@@ -65,9 +87,11 @@ foreach($xml->status as $status)
   //$texto=str_replace($server.'/tag/#',$server.'/tag/',$texto);
   echo '<div id="unmensaje">';
   echo '<div id="cabecera"><img src="'.$imagen.'" Align=ABSMIDDLE>'.'   '.
-  '<strong>'.$RTtext.'<a target="_blank" href="'.$protocol.$server.'/'.$userini->screen_name.'">'.$userini->screen_name.'</a></strong><br \></div>';
-  echo $texto;
-  echo '<div id="pie"> <br /><hr width="50%"><a style="text-decoration:none;color:black" target="_blank" href="'.$protocol.$server.'/notice/'.$status->id.'">'.$fecha.'</a><br /></div>';
+  '<strong><a target="_blank" href="'.$protocol.$server.'/'.$user->screen_name.'">'.$user->screen_name.'</a></strong><br \></div>';
+  echo '<div id="cuerpo">'.$texto.'</div>';
+  echo '<div id="pie"> <br /><a target="_blank" href="'.$protocol.$server.'/notice/'.$status->id.'">'.$fecha.'</a>
+  <strong>'.$RTtext.'<a target="_blank" href="'.$protocol.$server.'/'.$userini->screen_name.'">'.$userini->screen_name.'</a></strong>
+  </div>';
   echo '</div>';
   if (++$cont>=$cuantos) {
    break;
