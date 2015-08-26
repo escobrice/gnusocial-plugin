@@ -2,7 +2,7 @@
 header('Content-Type: text/html; charset=UTF-8');
 #-- Hay que habilitar en php.ini la linea ;extension=php_openssl.dll (simplemente quitar el ;)
 #-- Config
-$timeline="user"; //user: usuario ; friends: /all
+$timeline="friends"; //user: usuario ; friends: /all
 $server = "gnusocial.net";
 $username= "colegota";
 $protocol = "http://";
@@ -23,6 +23,7 @@ color: #333;
 border: 1px solid gray;
 }
 #cabecera{
+	word-wrap: break-word;
 padding: .5em;
 background-color: #ddd;
 border-bottom: 1px solid gray;
@@ -60,6 +61,10 @@ echo '<div id="mensajes" style="font-size:small;">';
 foreach($xml->status as $status)
   {
   $user=$status->user;
+  $namespaces = $user->getNamespaces(true);
+  $statusnet = $user->children($namespaces["statusnet"]);
+  $perfil=$statusnet->profile_url;
+    
   $retweet=$status->retweeted_status;
   if ($retweet != "") {
     $status=$status->retweeted_status;
@@ -70,8 +75,12 @@ foreach($xml->status as $status)
   }
    
   $usercab=$status->user;
+  $namespacescab = $usercab->getNamespaces(true);
+  $textocab = $usercab->children($namespacescab["statusnet"]);
+  $perfilcab=$textocab->profile_url;
+  
   $imagen=$usercab->profile_image_url;
-  $perfil=$usercab->{'statusnet:profile_url'};
+  
 
  $respuestaa=$status->in_reply_to_screen_name;
  if ($respuestaa != "") {
@@ -89,10 +98,10 @@ else {
  
  echo '<div id="unmensaje">';
   echo '<div id="cabecera"><img src="'.$imagen.'" Align=ABSMIDDLE>'.'   '.
-  '<strong><a target="_blank" href="'.$protocol.$server.'/'.$usercab->screen_name.'">'.$textocabecera.'</a></strong><br \></div>';
+  '<strong><a target="_blank" href="'.$perfilcab.'">'.$textocabecera.'</a></strong><br \></div>';
   echo '<div id="cuerpo">'.$html.'</div>';
   echo '<div id="pie"> <br /><a target="_blank" href="'.$protocol.$server.'/notice/'.$status->id.'">'.$fecha.'</a>
-  <strong>'.$RTtext.'<a target="_blank" href="'.$protocol.$server.'/'.$user->screen_name.'">'.$user->screen_name.'</a></strong>
+  <strong>'.$RTtext.'<a target="_blank" href="'.$perfil.'">'.$user->screen_name.'</a></strong>
   </div>';
   echo '</div>';
   if (++$cont>=$cuantos) {
