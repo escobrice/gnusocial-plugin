@@ -36,24 +36,25 @@ clear: both;
 margin: 0;
 padding: .5em;
 }
-a {
+#unmensaje a {
 color: #666	
 }
-a:link {
+#unmensaje a:link {
     text-decoration: none;
 }
 
-a:visited {
+#unmensaje a:visited {
     text-decoration: none;
 }
 
-a:hover {
+#unmensaje a:hover {
     text-decoration: underline;
 }
 
-a:active {
+#unmensaje a:active {
     text-decoration: underline;
 }
+
 </style>';
 echo '<div id="mensajes">';
 foreach($xml->status as $status)
