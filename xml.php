@@ -23,12 +23,12 @@ color: #333;
 border: 1px solid gray;
 }
 #cabecera{
-	word-wrap: break-word;
 padding: .5em;
 background-color: #ddd;
 border-bottom: 1px solid gray;
 }
 #cuerpo{
+word-wrap: break-word;
 padding: .5em;
 background-color: #0;
 }
