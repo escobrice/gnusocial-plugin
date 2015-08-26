@@ -57,7 +57,7 @@ a:active {
     text-decoration: underline;
 }
 </style>';
-echo '<div id="mensajes" style="font-size:small;">';
+echo '<div id="mensajes">';
 foreach($xml->status as $status)
   {
   $user=$status->user;
