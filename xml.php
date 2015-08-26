@@ -8,8 +8,6 @@ $username= "colegota";
 $protocol = "http://";
 $cuantos = 10;
 $cont=0;
-$user2="";
-$respuesta="";
 
 #-- En la siguiente linea simplemente metemos el timeline del usuario
 $xml = simplexml_load_file($protocol.$server."/api/statuses/".$timeline."_timeline/".$username.".xml");
