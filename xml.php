@@ -4,12 +4,15 @@ header('Content-Type: text/html; charset=UTF-8');
 #-- Config
 $timeline="user"; //user: usuario ; friends: /all
 $server = "gnusocial.net";
-$user= "colegota";
+$username= "colegota";
 $protocol = "http://";
 $cuantos = 10;
 $cont=0;
+$user2="";
+$respuesta="";
+
 #-- En la siguiente linea simplemente metemos el timeline del usuario
-$xml = simplexml_load_file($protocol.$server."/api/statuses/".$timeline."_timeline/".$user.".xml");
+$xml = simplexml_load_file($protocol.$server."/api/statuses/".$timeline."_timeline/".$username.".xml");
 echo '<style type="text/css" media="screen">
 #unmensaje
 {
@@ -56,41 +59,40 @@ a:active {
 echo '<div id="mensajes" style="font-size:small;">';
 foreach($xml->status as $status)
   {
+  $user=$status->user;
   $retweet=$status->retweeted_status;
   if ($retweet != "") {
-    $userini=$status->user;
     $status=$status->retweeted_status;
-        $RTtext="Repetido por ";
+    $RTtext="Repetido por ";
   }
   else {
-    //$user=$status->user;
-    $userini=$status->user;
-    $RTtext="";
+      $RTtext="";
   }
-  $user=$status->user;
-  $imagen=$user->profile_image_url;
-  $perfil=$user->{'statusnet:profile_url'};
+   
+  $usercab=$status->user;
+  $imagen=$usercab->profile_image_url;
+  $perfil=$usercab->{'statusnet:profile_url'};
+
+ $respuestaa=$status->in_reply_to_screen_name;
+ if ($respuestaa != "") {
+  	  $textocabecera=$usercab->screen_name.' > '.$respuestaa;
+}
+else {
+  $textocabecera=$usercab->screen_name;
+}
+    
   $fecha=$status->created_at;
   $fecha=convertirfecha($fecha);
-  //$texto=$status->text;
   $namespaces = $status->getNamespaces(true);
-  $texto = $status->children($namespaces["html"]);
-  //$texto=$status->statusnet->html;
-  //$texto=convertirURL($texto);
-  //$texto=convertirgrupo($texto);
-  //$texto=convertirusuario($texto);
-  //$texto=convertiretiqueta($texto);
-  //$html=$status->{'statusnet:html'};
-  #--Las siguientes dos lineas se hacen aquí, porque no fui capaz de que funcionara en las funciones
-  //$texto=str_replace('group/!','group/',$texto);
-  //$texto=str_replace($server.'/@',$server,$texto);
-  //$texto=str_replace($server.'/tag/#',$server.'/tag/',$texto);
-  echo '<div id="unmensaje">';
+  $texto = $status->children($namespaces["statusnet"]);
+  $html = $texto->html;
+ 
+ echo '<div id="unmensaje">';
   echo '<div id="cabecera"><img src="'.$imagen.'" Align=ABSMIDDLE>'.'   '.
-  '<strong><a target="_blank" href="'.$protocol.$server.'/'.$user->screen_name.'">'.$user->screen_name.'</a></strong><br \></div>';
-  echo '<div id="cuerpo">'.$texto.'</div>';
+  '<strong><a target="_blank" href="'.$protocol.$server.'/'.$usercab->screen_name.'">'.$textocabecera.'</a></strong><br \></div>';
+  echo '<div id="cuerpo">'.$html.'</div>';
   echo '<div id="pie"> <br /><a target="_blank" href="'.$protocol.$server.'/notice/'.$status->id.'">'.$fecha.'</a>
-  <strong>'.$RTtext.'<a target="_blank" href="'.$protocol.$server.'/'.$userini->screen_name.'">'.$userini->screen_name.'</a></strong>
+  <strong>'.$RTtext.'<a target="_blank" href="'.$protocol.$server.'/'.$user->screen_name.'">'.$user->screen_name.'</a></strong>
   </div>';
   echo '</div>';
   if (++$cont>=$cuantos) {
@@ -98,30 +100,7 @@ foreach($xml->status as $status)
    }
   }
   echo '</div>';
-  function convertirURL($url)
-{
-    $reg = '/(?<!(?:\]|=))(http:\/\/[\w\/*\?*\&*\=*\.*]+)(?!(?:\[|\]))/i';
-	$rep = '<a target="_blank" href="$1">$1</a>';
-	return preg_replace($reg, $rep, $url);
-}
- function convertirgrupo($url)
-{
-    $reg= '/(![\w]+)/i';
-    $rep = '<a target="_blank" href="'.$protocol.$server.'/group/$1"><i>$1</i></a>';
-	return preg_replace($reg, $rep, $url);
-}
- function convertirusuario($url)
-{
-   	$reg= '/(@[\w]+)/i';
-	$rep = '<a target="_blank" href="'.$protocol.$server.'/$1"><strong>$1</strong></a>';
-	return preg_replace($reg, $rep, $url);
-}
- function convertiretiqueta($url)
-{
-   	$reg= '/(#[\w]+)/i';
-	$rep = '<a target="_blank" href="'.$protocol.$server.'/tag/$1"><strong>$1</strong></a>';
-	return preg_replace($reg, $rep, $url);
-}
+
  function convertirfecha($fecha)
 {
    $f=strtotime($fecha);
