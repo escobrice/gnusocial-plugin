@@ -16,6 +16,7 @@ $xml = simplexml_load_file($protocol.$server."/api/statuses/".$timeline."_timeli
 echo '<style type="text/css" media="screen">
 #unmensaje
 {
+word-wrap: break-word;
 width: 90%;
 margin: 5px auto;
 background-color: #fff;
@@ -28,7 +29,6 @@ background-color: #ddd;
 border-bottom: 1px solid gray;
 }
 #cuerpo{
-word-wrap: break-word;
 padding: .5em;
 background-color: #0;
 }
