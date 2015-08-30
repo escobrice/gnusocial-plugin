@@ -1,13 +1,13 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
-#-- Hay que habilitar en php.ini la linea ;extension=php_openssl.dll (simplemente quitar el ;)
-#-- Config
+#-- puede que haya que habilitar en php.ini la linea ;extension=php_openssl.dll (simplemente quitar el ;)
+
+#-- Configura con tus valores
 $timeline="user"; //user: usuario ; friends: /all
 $server = "gnusocial.net";
 $username= "colegota";
-$protocol = "http://";
-$cuantos = 10;
-$cont=0;
+$protocol = "http://"; // http:// o https://
+$cuantos = 10; // cuantos mensajes mostrar
 
 #-- En la siguiente linea simplemente metemos el timeline del usuario
 $xml = simplexml_load_file($protocol.$server."/api/statuses/".$timeline."_timeline/".$username.".xml");
@@ -56,6 +56,9 @@ color: #666
 </style>';
 
 #-- código del script
+#-- a partir de aquí no cambies nada si no sabes lo que haces :)
+$cont=0;
+
 echo '<div id="mensajes">';
 foreach($xml->status as $status)
   {
