@@ -11,6 +11,8 @@ $cont=0;
 
 #-- En la siguiente linea simplemente metemos el timeline del usuario
 $xml = simplexml_load_file($protocol.$server."/api/statuses/".$timeline."_timeline/".$username.".xml");
+
+#-- CSS para editar al gusto y adaptar a cada blog
 echo '<style type="text/css" media="screen">
 #unmensaje
 {
@@ -42,20 +44,18 @@ color: #666
 #unmensaje a:link {
     text-decoration: none;
 }
-
 #unmensaje a:visited {
     text-decoration: none;
 }
-
 #unmensaje a:hover {
     text-decoration: underline;
 }
-
 #unmensaje a:active {
     text-decoration: underline;
 }
-
 </style>';
+
+#-- código del script
 echo '<div id="mensajes">';
 foreach($xml->status as $status)
   {
