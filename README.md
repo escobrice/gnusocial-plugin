@@ -17,15 +17,15 @@ Se trata de un script PHP que se puede incluir en un widget de texto y el efecto
 1. Añadir un widget de texto (o el del plugin que elijas que lo permita) en WordPress.
 2. Copiar y pegar ahí el script [xml.php](https://github.com/escobrice/gnusocial-plugin/blob/master/xml.php) o descargartelo y modificar con un editor de código.
 3. Elegir entre la línea de tiempo del usuario o la de él y sus amigos
-    '$timeline="user"; //user: usuario ; friends: /all'
+    `$timeline="user"; //user: usuario ; friends: /all' 
 3. Modificar la línea con el servidor/nodo GNU Social
-    Ej.: '$server = "gnusocial.net";'
+    Ej.: `$server = "gnusocial.net";`
 4. Modificar la línea con el usuario/cuenta:
-    Ej.: '$username= "colegota";'
+    Ej.: `$username= "colegota";`
 5. Modificar la línea con el protocolo:
-    Ej.: '$protocol = "http://";'
+    Ej.: `$protocol = "http://";`
 4. Indicar cuantos mensajes queremos mostrar:
-    Ej.: '$cuantos = 10;'
+    Ej.: `$cuantos = 10;`
 7. Modificar el CSS para adaptar a la estética de tu blog.
 
 Puedes ver [un ejemplo funcionando aquí](http://colegota.fotolibre.net).
