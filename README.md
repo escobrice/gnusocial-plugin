@@ -4,6 +4,8 @@
 GNUSocialPress es casi un plugin para ver las líneas de tiempo de GNUSocial en WordPress.
 Se trata de un script PHP que se puede incluir en un widget de texto y el efecto es el mismo que las líneas de tiempo que muestran la actividad de una cuenta en redes sociales.
 
+![Ejemplo](http://www.fotolibre.org/albums/userpics/10002/normal_gnusocialpress.png)
+
 ## Requisitos
 * Una versión reciente de WordPress (suponemos que valdrá cualquiera, pero sólo lo hemos probado en WP 4.2 ;)
 * Un plugin que permita activar PHP en los widgets como [PHP Text Widget](https://wordpress.org/plugins/php-text-widget/) y  un widget de texto como el que viene por defecto en WordPress. Pero hay más combinaciones que pueden valer siempre que se permita ejecutar PHP en un widget.
@@ -38,3 +40,6 @@ La idea no es tanto el mantener y ampliar el script como que sea usado y mejorad
 [GNU social: como Twitter, pero mejor](https://flosspirit.wordpress.com/2014/10/12/gnu-social-como-twitter-pero-mejor/).
 
 [Hola, soy nuevo en “Quitter”. Enlaces de interés](https://flosspirit.wordpress.com/2015/01/17/quitter/).
+
+
+
