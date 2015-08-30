@@ -2,7 +2,7 @@
 header('Content-Type: text/html; charset=UTF-8');
 #-- Hay que habilitar en php.ini la linea ;extension=php_openssl.dll (simplemente quitar el ;)
 #-- Config
-$timeline="friends"; //user: usuario ; friends: /all
+$timeline="user"; //user: usuario ; friends: /all
 $server = "gnusocial.net";
 $username= "colegota";
 $protocol = "http://";
