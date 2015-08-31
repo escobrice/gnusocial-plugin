@@ -6,6 +6,8 @@ Se trata de un script PHP que se puede incluir en un widget de texto y el efecto
 
 ![Ejemplo](http://www.fotolibre.org/albums/userpics/10002/normal_gnusocialpress.png)
 
+Además, aunque inicialmente esté orientado a WordPress, el código PHP puede incrustarse en cualquier página web que soporte este lenguaje. Si este es tu caso, obvia todo lo que hace referencia a WordPress en las siguientes líneas y sustitúyelo por el equivalente en la página donde quieras insertar este código. :-D
+
 ## Requisitos
 * Una versión reciente de WordPress (suponemos que valdrá cualquiera, pero sólo lo hemos probado en WP 4.2 ;)
 * Un plugin que permita activar PHP en los widgets como [PHP Text Widget](https://wordpress.org/plugins/php-text-widget/) y  un widget de texto como el que viene por defecto en WordPress. Pero hay más combinaciones que pueden valer siempre que se permita ejecutar PHP en un widget.
