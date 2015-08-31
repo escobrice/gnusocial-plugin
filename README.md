@@ -32,9 +32,10 @@ Además, aunque inicialmente esté orientado a WordPress, el código PHP puede i
 
 Puedes ver [un ejemplo funcionando aquí](http://colegota.fotolibre.net).
 
-## Continuidad
-La idea no es tanto el mantener y ampliar el script como que sea usado y mejorado por la Comunidad.
+## Continuidad y soporte
+La idea no es tanto el mantener y ampliar el script como que sea usado y mejorado por la Comunidad. Se trata de un script muy sencillo que tiene poco que explicar.
 ¡Haz tus propias versiones y compártelas!
+A nosotros nos puedes contactar en el grupo [!gnusocialpress](https://gnusocial.net/group/gnusocialpress) en GNU Social.
 
 ## Sobre GNU Social
 [GNU social: lo más básico](https://flosspirit.wordpress.com/2015/01/16/gnu-social-lo-mas-basico/).
